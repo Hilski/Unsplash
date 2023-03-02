@@ -4,24 +4,29 @@ import android.app.Application
 import android.content.Intent
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.unsplash.R
 import com.example.unsplash.data.auth.AuthRepository
+import com.example.unsplash.data.github.UserRepository
+import com.example.unsplash.data.github.models.RemoteGithubUser
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationService
 
-class UserInfoViewModel(application: Application): AndroidViewModel(application) {
+class UserInfoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val authService: AuthorizationService = AuthorizationService(getApplication())
 
     private val authRepository = AuthRepository()
- //   private val userRepository = UserRepository()
+    private val userRepository = UserRepository()
 
     private val loadingMutableStateFlow = MutableStateFlow(false)
- //   private val userInfoMutableStateFlow = MutableStateFlow<RemoteGithubUser?>(null)
+    private val userInfoMutableStateFlow = MutableStateFlow<RemoteGithubUser?>(null)
     private val toastEventChannel = Channel<Int>(Channel.BUFFERED)
     private val logoutPageEventChannel = Channel<Intent>(Channel.BUFFERED)
     private val logoutCompletedEventChannel = Channel<Unit>(Channel.BUFFERED)
@@ -30,8 +35,8 @@ class UserInfoViewModel(application: Application): AndroidViewModel(application)
     val loadingFlow: Flow<Boolean>
         get() = loadingMutableStateFlow.asStateFlow()
 
- //   val userInfoFlow: Flow<RemoteGithubUser?>
-   //     get() = userInfoMutableStateFlow.asStateFlow()
+    val userInfoFlow: Flow<RemoteGithubUser?>
+        get() = userInfoMutableStateFlow.asStateFlow()
 
     val toastFlow: Flow<Int>
         get() = toastEventChannel.receiveAsFlow()
@@ -46,7 +51,7 @@ class UserInfoViewModel(application: Application): AndroidViewModel(application)
         authRepository.corruptAccessToken()
     }
 
-/*    fun loadUserInfo() {
+    fun loadUserInfo() {
         viewModelScope.launch {
             loadingMutableStateFlow.value = true
             runCatching {
@@ -62,7 +67,6 @@ class UserInfoViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
- */
 
     fun logout() {
         val customTabsIntent = CustomTabsIntent.Builder().build()

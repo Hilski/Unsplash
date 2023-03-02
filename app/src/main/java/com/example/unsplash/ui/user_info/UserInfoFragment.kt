@@ -37,9 +37,9 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
         binding.corruptAccessToken.setOnClickListener {
             viewModel.corruptAccessToken()
         }
- //       binding.getUserInfo.setOnClickListener {
- //           viewModel.loadUserInfo()
- //       }
+       binding.getUserInfo.setOnClickListener {
+           viewModel.loadUserInfo()
+       }
 
         binding.logout.setOnClickListener {
             viewModel.logout()
@@ -51,9 +51,9 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
             binding.userInfo.isVisible = !isLoading
         }
 
- //       viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
- //           binding.userInfo.text = userInfo?.login
- //       }
+       viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
+          binding.userInfo.text = userInfo?.login
+       }
 
         viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {
             toast(it)

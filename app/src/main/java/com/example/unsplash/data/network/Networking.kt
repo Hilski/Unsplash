@@ -2,11 +2,13 @@ package com.example.unsplash.data.network
 
 import android.content.Context
 import com.example.unsplash.data.auth.TokenStorage
+import com.example.unsplash.data.github.GithubApi
 import net.openid.appauth.AuthorizationService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import timber.log.Timber
 
 object Networking {
@@ -14,8 +16,8 @@ object Networking {
     private var okhttpClient: OkHttpClient? = null
     private var retrofit: Retrofit? = null
 
- //   val githubApi: GithubApi
- //       get() = retrofit?.create() ?: error("retrofit is not initialized")
+    val githubApi: GithubApi
+        get() = retrofit?.create() ?: error("retrofit is not initialized")
 
     fun init(context: Context) {
         okhttpClient = OkHttpClient.Builder()

@@ -15,9 +15,16 @@
             app:destination="@id/repositoryListFragment"
             app:popUpTo="@id/authFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authFragment_to_bottomNavigationFragment"
+            app:destination="@id/bottomNavigationFragment" />
     </fragment>
     <fragment
         android:id="@+id/repositoryListFragment"
         android:name="com.example.unsplash.ui.user_info.UserInfoFragment"
         android:label="RepositoryListFragment" />
+    <fragment
+        android:id="@+id/bottomNavigationFragment"
+        android:name="com.example.unsplash.ui.BottomNavigationFragment"
+        android:label="BottomNavigationFragment" />
 </navigation>

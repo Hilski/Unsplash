@@ -6,4 +6,6 @@
     <string name="get_user_info">Get user info</string>
     <string name="get_user_error">Get user error</string>
     <string name="logout">logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
