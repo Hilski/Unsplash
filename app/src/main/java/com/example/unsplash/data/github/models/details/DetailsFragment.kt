@@ -1,4 +1,4 @@
-package com.example.unsplash.ui.details
+package com.example.unsplash.data.github.models.details
 
 import android.content.Intent
 import android.graphics.drawable.Drawable

@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
     id("kotlin-parcelize")
 }
 
@@ -24,7 +24,7 @@ android {
                 appAuthRedirectScheme: "ru.kts.oauth"
         ]
 
-        buildConfigField("String", "UNSPLASH_ACCESS_KEY", unsplash_access_key)
+        buildConfigField "String", "UNSPLASH_ACCESS_KEY", unsplash_access_key
 
     }
 
@@ -73,7 +73,7 @@ dependencies {
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-android-compiler:2.44"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:2.44"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1"
     kapt "androidx.hilt:hilt-compiler:2.44"
     // Retrofit + GSON
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
