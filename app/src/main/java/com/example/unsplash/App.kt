@@ -2,6 +2,7 @@ package com.example.unsplash
 
 import android.app.Application
 import com.example.unsplash.data.network.Networking
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp

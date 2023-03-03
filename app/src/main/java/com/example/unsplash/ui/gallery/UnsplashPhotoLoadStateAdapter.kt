@@ -2,9 +2,11 @@ package com.example.unsplash.ui.gallery
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.unsplash.databinding.UnsplashPhotoLoadStateFooterBinding
 
 class UnsplashPhotoLoadStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<UnsplashPhotoLoadStateAdapter.LoadStateViewHolder>() {
