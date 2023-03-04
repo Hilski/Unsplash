@@ -71,7 +71,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     override fun onItemClick(photo: UnsplashPhoto) {
         val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
-
         findNavController().navigate(action)
     }
 
