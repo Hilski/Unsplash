@@ -14,7 +14,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private val args by navArgs<DetailsFragmentArgs>()
@@ -31,7 +33,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 //full очень большая для показа прогресса загрузки, regular меньше
                 .load(photo.urls.full)
                 .error(R.drawable.ic_error)
-                .listener(object : RequestListener<Drawable> {
+ /*               .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
                         model: Any?,
@@ -56,6 +58,9 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     }
 
                 })
+
+  */
+
                 .into(imageView)
 
             textViewDescription.text = photo.description

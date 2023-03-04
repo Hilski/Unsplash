@@ -1,6 +1,7 @@
 package com.example.unsplash.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.unsplash.api.UnsplashApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -27,5 +28,9 @@ class UnsplashPagingSource(
         } catch (exception: HttpException) {
             LoadResult.Error(exception)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? {
+        TODO("Not yet implemented")
     }
 }

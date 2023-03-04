@@ -9,6 +9,7 @@ import com.example.unsplash.R
 import com.example.unsplash.data.auth.AuthRepository
 import com.example.unsplash.data.github.UserRepository
 import com.example.unsplash.data.github.models.RemoteGithubUser
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +18,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationService
+import javax.inject.Inject
 
-class UserInfoViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class UserInfoViewModel @Inject constructor(application: Application) :
+    AndroidViewModel(application) {
 
     private val authService: AuthorizationService = AuthorizationService(getApplication())
 

@@ -16,7 +16,8 @@ import com.example.unsplash.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery), UnsplashPhotoAdapter.OnItemClickListener {
+class GalleryFragment : Fragment(R.layout.fragment_gallery),
+    UnsplashPhotoAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<GalleryViewModel>()
     private var _binding: FragmentGalleryBinding? = null
@@ -70,6 +71,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery), UnsplashPhotoAdapte
 
     override fun onItemClick(photo: UnsplashPhoto) {
         val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
+
         findNavController().navigate(action)
     }
 

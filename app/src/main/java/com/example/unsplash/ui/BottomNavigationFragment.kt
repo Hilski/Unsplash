@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentBottomNavigationBinding
+import com.example.unsplash.ui.gallery.GalleryFragment
 import com.example.unsplash.ui.user_info.UserInfoFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class BottomNavigationFragment : Fragment() {
 
     private var _binding: FragmentBottomNavigationBinding? = null
@@ -30,7 +32,7 @@ class BottomNavigationFragment : Fragment() {
 
         binding.bottomView.setOnItemSelectedListener {
             val fragment = when (it.title) {
-                "1" -> UserInfoFragment()
+                "1" -> GalleryFragment()
                 "2" -> UserInfoFragment()
                 "3" -> UserInfoFragment()
                 else -> return@setOnItemSelectedListener false

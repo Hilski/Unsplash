@@ -13,9 +13,11 @@ import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentAuthBinding
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.toast
+import dagger.hilt.android.AndroidEntryPoint
 import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationResponse
 
+@AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.fragment_auth) {
 
     private val viewModel: AuthViewModel by viewModels()

@@ -7,10 +7,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.unsplash.data.UnsplashRepository
 import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GalleryViewModel @ViewModelInject constructor(
+@HiltViewModel
+class GalleryViewModel @Inject constructor(
     private val repository: UnsplashRepository,
-    @Assisted state: SavedStateHandle
+    state: SavedStateHandle
 ) :
     ViewModel() {
 

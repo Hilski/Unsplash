@@ -14,7 +14,9 @@ import com.example.unsplash.databinding.FragmentUserInfoBinding
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.resetNavGraph
 import com.example.unsplash.utils.toast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
 
     private val viewModel: UserInfoViewModel by viewModels()
