@@ -22,6 +22,8 @@ class BottomNavigationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        parentFragmentManager.commit {
+            replace(R.id.container, GalleryFragment())}
     }
 
     override fun onCreateView(
@@ -37,7 +39,7 @@ class BottomNavigationFragment : Fragment() {
                 "3" -> UserInfoFragment()
                 else -> return@setOnItemSelectedListener false
             }
-            parentFragmentManager
+ //           parentFragmentManager
 
             parentFragmentManager.commit {
                 replace(R.id.container, fragment)

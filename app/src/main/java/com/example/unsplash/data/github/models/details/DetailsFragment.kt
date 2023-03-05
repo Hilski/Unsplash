@@ -7,13 +7,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.example.unsplash.R
+import com.example.unsplash.data.UnsplashPhoto
 import com.example.unsplash.databinding.FragmentDetailsBinding
+import com.example.unsplash.ui.gallery.GalleryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,50 +31,66 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         val binding = FragmentDetailsBinding.bind(view)
 
+        binding.backButton.setOnClickListener {
+
+
+            parentFragmentManager.commit { replace(R.id.container, GalleryFragment()) }
+
+        }
+
+
         binding.apply {
-            val photo = args.photo
+ //           val photo = args.photo
 
-            Glide.with(this@DetailsFragment)
-                //full очень большая для показа прогресса загрузки, regular меньше
-                .load(photo.urls.full)
-                .error(R.drawable.ic_error)
- /*               .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.isVisible = false
-                        return false
-                    }
+            val photo = arguments?.getParcelable<UnsplashPhoto>("Key")
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.isVisible = false
-                        textViewCreator.isVisible = true
-                        textViewDescription.isVisible = photo.description != null
-                        return false
-                    }
+            if (photo != null) {
+                Glide.with(this@DetailsFragment)
+                    //full очень большая для показа прогресса загрузки, regular меньше
+                    .load(photo.urls.full)
+                    .error(R.drawable.ic_error)
+                                  .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                progressBar.isVisible = false
+                                return false
+                            }
 
-                })
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                progressBar.isVisible = false
+                                textViewCreator.isVisible = true
+                                textViewDescription.isVisible = photo.description != null
+                                return false
+                            }
 
-  */
+                        })
 
-                .into(imageView)
 
-            textViewDescription.text = photo.description
 
-            val uri = Uri.parse(photo.user.attributionUrl)
+                    .into(imageView)
+            }
+
+            if (photo != null) {
+                textViewDescription.text = photo.description
+            }
+
+            val uri = Uri.parse(photo?.user?.attributionUrl ?: "")
             val intent = Intent(Intent.ACTION_VIEW, uri)
 
             textViewCreator.apply {
-                text = "Photo by ${photo.user.name} on Unsplash"
+                if (photo != null) {
+                    text = "Photo by ${photo.user.name} on Unsplash"
+                }
                 setOnClickListener {
                     context.startActivity(intent)
                 }

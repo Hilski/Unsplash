@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_galleryFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_bottomNavigationFragment"
+            app:destination="@id/bottomNavigationFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -22,6 +25,12 @@
         <argument
             android:name="photo"
             app:argType="com.example.unsplash.data.UnsplashPhoto" />
+        <action
+            android:id="@+id/action_detailsFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_galleryFragment2"
+            app:popUpTo="@id/galleryFragment" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
