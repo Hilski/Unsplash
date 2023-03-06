@@ -77,17 +77,16 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     override fun onItemClick(photo: UnsplashPhoto) {
 
+
+        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
+        findNavController().navigate(action)
  //       val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
  //       findNavController().navigate(action)
-        val args = Bundle().apply {
-           putParcelable("Key", photo)
-        }
+       // val args = Bundle().apply {
+       //    putParcelable("Key", photo)
+      //  }
 
-
-
-
-
-       parentFragmentManager.commitNow {  replace(R.id.container, DetailsFragment()::class.java, args).isAddToBackStackAllowed }
+       //parentFragmentManager.commitNow {  replace(R.id.container, DetailsFragment()::class.java, args).isAddToBackStackAllowed }
  //       parentFragmentManager.commitNow {  replace(R.id.container, DetailsFragment()) }
 
 

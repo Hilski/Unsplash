@@ -6,46 +6,16 @@
     app:startDestination="@id/authFragment">
 
     <fragment
-        android:id="@+id/galleryFragment"
-        android:name="com.example.unsplash.ui.gallery.GalleryFragment"
-        android:label="Gallery"
-        tools:layout="@layout/fragment_gallery">
-        <action
-            android:id="@+id/action_galleryFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <action
-            android:id="@+id/action_galleryFragment_to_bottomNavigationFragment"
-            app:destination="@id/bottomNavigationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.unsplash.data.github.models.details.DetailsFragment"
-        android:label="Photo"
-        tools:layout="@layout/fragment_details">
-        <argument
-            android:name="photo"
-            app:argType="com.example.unsplash.data.UnsplashPhoto" />
-        <action
-            android:id="@+id/action_detailsFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
-        <action
-            android:id="@+id/action_detailsFragment_to_galleryFragment2"
-            app:popUpTo="@id/galleryFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/authFragment"
         android:name="com.example.unsplash.ui.auth.AuthFragment"
         android:label="AuthFragment" >
         <action
-            android:id="@+id/action_authFragment_to_bottomNavigationFragment"
-            app:destination="@id/bottomNavigationFragment" />
+            android:id="@+id/action_authFragment_to_navigationActivity"
+            app:destination="@id/navigationActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/bottomNavigationFragment"
-        android:name="com.example.unsplash.ui.BottomNavigationFragment"
-        android:label="BottomNavigationFragment" >
-        <action
-            android:id="@+id/action_bottomNavigationFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-    </fragment>
+    <activity
+        android:id="@+id/navigationActivity"
+        android:name="com.example.unsplash.ui.NavigationActivity"
+        android:label="activity_navigation"
+        tools:layout="@layout/activity_navigation" />
 </navigation>

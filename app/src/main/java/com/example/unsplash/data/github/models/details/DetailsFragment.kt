@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.data.UnsplashPhoto
 import com.example.unsplash.databinding.FragmentDetailsBinding
@@ -31,66 +32,47 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         val binding = FragmentDetailsBinding.bind(view)
 
-        binding.backButton.setOnClickListener {
-
-
-            parentFragmentManager.commit { replace(R.id.container, GalleryFragment()) }
-
-        }
-
-
         binding.apply {
- //           val photo = args.photo
+            val photo = args.photo
 
-            val photo = arguments?.getParcelable<UnsplashPhoto>("Key")
+            Glide.with(this@DetailsFragment)
+                //full очень большая для показа прогресса загрузки, regular меньше
+                .load(photo.urls.full)
+                .error(R.drawable.ic_error)
+                .listener(object : RequestListener<Drawable>{
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.isVisible = false
+                        return false
+                    }
 
-            if (photo != null) {
-                Glide.with(this@DetailsFragment)
-                    //full очень большая для показа прогресса загрузки, regular меньше
-                    .load(photo.urls.full)
-                    .error(R.drawable.ic_error)
-                                  .listener(object : RequestListener<Drawable> {
-                            override fun onLoadFailed(
-                                e: GlideException?,
-                                model: Any?,
-                                target: com.bumptech.glide.request.target.Target<Drawable>?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                progressBar.isVisible = false
-                                return false
-                            }
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.isVisible = false
+                        textViewCreator.isVisible = true
+                        textViewDescription.isVisible = photo.description != null
+                        return false
+                    }
 
-                            override fun onResourceReady(
-                                resource: Drawable?,
-                                model: Any?,
-                                target: com.bumptech.glide.request.target.Target<Drawable>?,
-                                dataSource: DataSource?,
-                                isFirstResource: Boolean
-                            ): Boolean {
-                                progressBar.isVisible = false
-                                textViewCreator.isVisible = true
-                                textViewDescription.isVisible = photo.description != null
-                                return false
-                            }
+                })
+                .into(imageView)
 
-                        })
+            textViewDescription.text = photo.description
 
-
-
-                    .into(imageView)
-            }
-
-            if (photo != null) {
-                textViewDescription.text = photo.description
-            }
-
-            val uri = Uri.parse(photo?.user?.attributionUrl ?: "")
+            val uri = Uri.parse(photo.user.attributionUrl)
             val intent = Intent(Intent.ACTION_VIEW, uri)
 
             textViewCreator.apply {
-                if (photo != null) {
-                    text = "Photo by ${photo.user.name} on Unsplash"
-                }
+                text = "Photo by ${photo.user.name} on Unsplash"
                 setOnClickListener {
                     context.startActivity(intent)
                 }
