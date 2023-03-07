@@ -4,7 +4,10 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,6 +22,8 @@ import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.data.UnsplashPhoto
 import com.example.unsplash.databinding.FragmentDetailsBinding
+import com.example.unsplash.ui.MainActivity
+import com.example.unsplash.ui.NavigationActivity
 import com.example.unsplash.ui.gallery.GalleryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +36,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentDetailsBinding.bind(view)
+
+
 
         binding.apply {
             val photo = args.photo
@@ -79,5 +86,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 paint.isUnderlineText = true
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        (activity as NavigationActivity).supportActionBar?.hide()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

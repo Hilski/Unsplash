@@ -1,9 +1,7 @@
 package com.example.unsplash.ui.gallery
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
+import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -18,6 +16,7 @@ import com.example.unsplash.R
 import com.example.unsplash.data.UnsplashPhoto
 import com.example.unsplash.data.github.models.details.DetailsFragment
 import com.example.unsplash.databinding.FragmentGalleryBinding
+import com.example.unsplash.ui.NavigationActivity
 import com.example.unsplash.ui.user_info.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -113,6 +112,15 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             }
 
         })
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        (activity as NavigationActivity).supportActionBar?.show()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onDestroyView() {
