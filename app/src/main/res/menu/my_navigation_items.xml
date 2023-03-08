@@ -5,11 +5,11 @@
         android:icon="@drawable/photo"
         android:title="Photo" />
     <item
-        android:id="@+id/userInfoFragment"
+        android:id="@+id/userInfo"
         android:icon="@drawable/photo_library"
         android:title="Collections" />
     <item
-        android:id="@+id/getUserInfo"
+        android:id="@+id/userInfoFragment"
         android:icon="@drawable/ic_user"
         android:title="User" />
 </menu>

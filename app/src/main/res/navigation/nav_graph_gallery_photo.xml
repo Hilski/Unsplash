@@ -11,7 +11,7 @@
  />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.unsplash.data.github.models.details.DetailsFragment"
+        android:name="com.example.unsplash.ui.gallery.DetailsFragment"
 
         tools:layout="@layout/fragment_details" >
         <argument

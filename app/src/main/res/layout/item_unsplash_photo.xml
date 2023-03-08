@@ -21,7 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/image_view"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:drawablePadding="4dp"
         android:ellipsize="end"
         android:gravity="center_vertical"
@@ -29,5 +32,35 @@
         android:textColor="#fff"
         app:drawableStartCompat="@drawable/ic_user"
         tools:text="username" />
+
+    <ImageView
+        android:id="@+id/image_view_my_like"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@id/image_view"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@id/text_view_likes" />
+
+
+    <TextView
+        android:id="@+id/text_view_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/image_view"
+        android:layout_alignBottom="@id/image_view"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:drawablePadding="4dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="#fff"
+        tools:text="likes" />
 
 </RelativeLayout>

@@ -3,21 +3,15 @@ package com.example.unsplash.ui.gallery
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.commitNow
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.unsplash.R
 import com.example.unsplash.data.UnsplashPhoto
-import com.example.unsplash.data.github.models.details.DetailsFragment
 import com.example.unsplash.databinding.FragmentGalleryBinding
 import com.example.unsplash.ui.NavigationActivity
-import com.example.unsplash.ui.user_info.UserInfoFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,25 +64,12 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
                 }
             }
         }
-
         setHasOptionsMenu(true)
     }
 
     override fun onItemClick(photo: UnsplashPhoto) {
-
-
         val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
         findNavController().navigate(action)
- //       val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
- //       findNavController().navigate(action)
-       // val args = Bundle().apply {
-       //    putParcelable("Key", photo)
-      //  }
-
-       //parentFragmentManager.commitNow {  replace(R.id.container, DetailsFragment()::class.java, args).isAddToBackStackAllowed }
- //       parentFragmentManager.commitNow {  replace(R.id.container, DetailsFragment()) }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -110,7 +91,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
-
         })
     }
 

@@ -52,7 +52,27 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
                     .error(R.drawable.ic_error)
                     .into(imageView)
 
+                if (photo.liked_by_user) {
+                    Glide.with(imageViewMyLike)
+                        .load(R.drawable.ic_favorite)
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .error(R.drawable.ic_error)
+                        .into(imageViewMyLike)
+                } else {
+                    Glide.with(imageViewMyLike)
+                        .load(R.drawable.ic_favorite_border)
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .error(R.drawable.ic_error)
+                        .into(imageViewMyLike)
+                }
+
+
+
                 textViewUserName.text = photo.user.username
+                textViewLikes.text = photo.likes
+
             }
         }
     }

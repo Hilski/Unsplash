@@ -1,4 +1,4 @@
-package com.example.unsplash.data.github.models.details
+package com.example.unsplash.ui.gallery
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -7,12 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.commit
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -20,11 +16,9 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
-import com.example.unsplash.data.UnsplashPhoto
+
 import com.example.unsplash.databinding.FragmentDetailsBinding
-import com.example.unsplash.ui.MainActivity
 import com.example.unsplash.ui.NavigationActivity
-import com.example.unsplash.ui.gallery.GalleryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,6 +61,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
                         textViewDescription.isVisible = photo.description != null
+//                        textViewExifModel.isVisible = photo.description != null
+                        textViewExifModel.isVisible = true
                         return false
                     }
 
@@ -74,6 +70,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 .into(imageView)
 
             textViewDescription.text = photo.description
+           textViewExifModel.text = photo.exif?.make ?: "qwerty"
 
             val uri = Uri.parse(photo.user.attributionUrl)
             val intent = Intent(Intent.ACTION_VIEW, uri)
