@@ -74,14 +74,15 @@ class AuthorizationFailedInterceptor(
 
         val tokenRefreshed = runBlocking {
             runCatching {
-                val refreshRequest = AppAuth.getRefreshTokenRequest(tokenStorage.refreshToken.orEmpty())
+                val refreshRequest = AppAuth.getRefreshTokenRequest(tokenStorage.accessToken.orEmpty())
                 AppAuth.performTokenRequestSuspend(authorizationService, refreshRequest)
             }
                 .getOrNull()
                 ?.let { tokens ->
-                    TokenStorage.accessToken = tokens.accessToken
-                    TokenStorage.refreshToken = tokens.refreshToken
-                    TokenStorage.idToken = tokens.idToken
+                    TokenStorage.accessToken = tokens.access_token
+                    TokenStorage.tokenType = tokens.token_type
+                    TokenStorage.scope = tokens.scope
+                    TokenStorage.createdAt = tokens.created_at
                     true
                 } ?: false
         }

@@ -14,8 +14,10 @@ class AuthRepository {
 
     fun logout() {
         TokenStorage.accessToken = null
-        TokenStorage.refreshToken = null
-        TokenStorage.idToken = null
+        TokenStorage.tokenType = null
+        TokenStorage.scope = null
+        TokenStorage.createdAt = null
+
     }
 
     fun getAuthRequest(): AuthorizationRequest {
@@ -32,9 +34,11 @@ class AuthRepository {
     ) {
         val tokens = AppAuth.performTokenRequestSuspend(authService, tokenRequest)
         //обмен кода на токен произошел успешно, сохраняем токены и завершаем авторизацию
-        TokenStorage.accessToken = tokens.accessToken
-        TokenStorage.refreshToken = tokens.refreshToken
-        TokenStorage.idToken = tokens.idToken
-        Timber.tag("Oauth").d("6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
+        TokenStorage.accessToken = tokens.access_token
+        TokenStorage.tokenType = tokens.token_type
+        TokenStorage.scope = tokens.scope
+        TokenStorage.createdAt = tokens.created_at
+
+        Timber.tag("Oauth").d("6. Tokens accepted:\n access=${tokens.access_token}\nrefresh=${tokens.token_type}\nidToken=${tokens.scope}")
     }
 }

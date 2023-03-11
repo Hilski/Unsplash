@@ -54,7 +54,7 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
         }
 
        viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
-          binding.userInfo.text = userInfo?.login
+          binding.userInfo.text = userInfo?.location
        }
 
         viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {

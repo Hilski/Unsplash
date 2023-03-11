@@ -50,19 +50,25 @@ object AppAuth {
         tokenRequest: TokenRequest,
     ): TokensModel {
         return suspendCoroutine { continuation ->
-            authService.performTokenRequest(tokenRequest, getClientAuthentication()) { response, ex ->
+            authService.performTokenRequest(
+                tokenRequest,
+                getClientAuthentication()
+            ) { response, ex ->
                 when {
                     response != null -> {
                         //получение токена произошло успешно
                         val tokens = TokensModel(
-                            accessToken = response.accessToken.orEmpty(),
-                            refreshToken = response.refreshToken.orEmpty(),
-                            idToken = response.idToken.orEmpty()
+                            access_token = response.accessToken.orEmpty(),
+                            token_type = response.refreshToken.orEmpty(),
+                            scope = response.idToken.orEmpty(),
+                            created_at = response.scope.orEmpty()
                         )
                         continuation.resumeWith(Result.success(tokens))
                     }
                     //получение токенов произошло неуспешно, показываем ошибку
-                    ex != null -> { continuation.resumeWith(Result.failure(ex)) }
+                    ex != null -> {
+                        continuation.resumeWith(Result.failure(ex))
+                    }
                     else -> error("unreachable")
                 }
             }
@@ -78,7 +84,8 @@ object AppAuth {
         const val TOKEN_URI = "https://unsplash.com/oauth/token"
         const val END_SESSION_URI = "https://unsplash.com/logout"
         const val RESPONSE_TYPE = ResponseTypeValues.CODE
-        const val SCOPE = "public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections"
+        const val SCOPE =
+            "public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections"
 
         const val CLIENT_ID = "tFCb1X4iR4IkQYI4oTBBCVAsxivwhdVMaZMTIcJF9jw"
         const val CLIENT_SECRET = "ms3dV0_aeYFr7a0ZbT-zmgu92ptMtx7fze9YE1Tn5PU"

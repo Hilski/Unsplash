@@ -8,7 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.unsplash.R
 import com.example.unsplash.data.auth.AuthRepository
 import com.example.unsplash.data.github.UserRepository
-import com.example.unsplash.data.github.models.RemoteGithubUser
+import com.example.unsplash.data.github.models.RemoteUser
+import com.example.unsplash.data.network.RetrofitInstance.interceptor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.trySendBlocking
@@ -18,6 +19,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +33,7 @@ class UserInfoViewModel @Inject constructor(application: Application) :
     private val userRepository = UserRepository()
 
     private val loadingMutableStateFlow = MutableStateFlow(false)
-    private val userInfoMutableStateFlow = MutableStateFlow<RemoteGithubUser?>(null)
+    private val userInfoMutableStateFlow = MutableStateFlow<RemoteUser?>(null)
     private val toastEventChannel = Channel<Int>(Channel.BUFFERED)
     private val logoutPageEventChannel = Channel<Intent>(Channel.BUFFERED)
     private val logoutCompletedEventChannel = Channel<Unit>(Channel.BUFFERED)
@@ -39,7 +42,7 @@ class UserInfoViewModel @Inject constructor(application: Application) :
     val loadingFlow: Flow<Boolean>
         get() = loadingMutableStateFlow.asStateFlow()
 
-    val userInfoFlow: Flow<RemoteGithubUser?>
+    val userInfoFlow: Flow<RemoteUser?>
         get() = userInfoMutableStateFlow.asStateFlow()
 
     val toastFlow: Flow<Int>
@@ -56,6 +59,7 @@ class UserInfoViewModel @Inject constructor(application: Application) :
     }
 
     fun loadUserInfo() {
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         viewModelScope.launch {
             loadingMutableStateFlow.value = true
             runCatching {

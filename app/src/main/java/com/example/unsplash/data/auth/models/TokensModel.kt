@@ -1,7 +1,8 @@
 package com.example.unsplash.data.auth.models
 
 data class TokensModel(
-    val accessToken: String,
-    val refreshToken: String,
-    val idToken: String
+    val access_token: String,
+    val token_type: String,
+    val scope: String,
+    val created_at: String
 )

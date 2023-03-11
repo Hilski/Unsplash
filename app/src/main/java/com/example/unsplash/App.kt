@@ -1,7 +1,6 @@
 package com.example.unsplash
 
 import android.app.Application
-import com.example.unsplash.data.network.Networking
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -9,7 +8,7 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Networking.init(this)
+
         Timber.plant(Timber.DebugTree())
     }
 }
