@@ -89,8 +89,16 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/like_it_button"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_likes"
-                app:drawableStartCompat="@drawable/ic_favorite"
+                app:drawableStartCompat="@drawable/ic_favorite"/>
 
+            <Button
+                android:id="@+id/save_it_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/like_it_button" />
  />
 
 

@@ -1,5 +1,6 @@
 package com.example.unsplash.ui.gallery
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.unsplash.R
@@ -65,6 +66,7 @@ class DetailsViewModel @Inject constructor(private val repository: UnsplashRepos
             }
         }
     }
+
     fun unlikePhoto(idPhoto: String) {
         viewModelScope.launch {
             loadingMutableStateFlow.value = true
