@@ -1,7 +1,8 @@
-package com.example.unsplash.data
+package com.example.unsplash.data.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class UnsplashPhoto(
@@ -10,6 +11,7 @@ data class UnsplashPhoto(
     val liked_by_user: Boolean,
     val description: String?,
     val exif: UnsplashExif?,
+    val location: UnsplashLocation?,
     val urls: UnsplashPhotoPhotoUrls,
     val user: UnsplashUser
 ) : Parcelable {
@@ -22,6 +24,18 @@ data class UnsplashPhoto(
         val focal_length: String?,
         val iso: String?
     ) : Parcelable
+    @Parcelize
+    data class UnsplashLocation(
+        val city: String?,
+        val country: String?,
+        val position: PhotoPosition?
+    ) : Parcelable {
+        @Parcelize
+        data class PhotoPosition(
+            val latitude: Double?,
+            val longitude: Double?
+        ) : Parcelable
+    }
 
     @Parcelize
     data class UnsplashPhotoPhotoUrls(
@@ -37,7 +51,7 @@ data class UnsplashPhoto(
         val name: String,
         val username: String
     ) : Parcelable {
-        val attributionUrl get() = "https://unsplash.com/$username?utm_sourse=ImageSearchApp&utm_medium=referral"
+        val attributionUrl get() = "https://unsplash.com/$username?utm_sourse=Mysplash&utm_medium=referral"
     }
 }
 

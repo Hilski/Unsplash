@@ -1,19 +1,11 @@
 package com.example.unsplash.data.network
 
-import android.content.Context
-import com.example.unsplash.api.UnsplashApi
-import com.example.unsplash.data.auth.TokenStorage
-import com.example.unsplash.data.github.UserApi
-import dagger.Provides
-import net.openid.appauth.AuthorizationService
+import com.example.unsplash.api.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
-import timber.log.Timber
-import javax.inject.Singleton
 
 object RetrofitInstance {
 
@@ -26,5 +18,11 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     val userApi: UserApi = retrofit.create(UserApi::class.java)
+
+    val likeApi: LikeApi = retrofit.create(LikeApi::class.java)
+
+    val UnlikeApi: UnLikeApi = retrofit.create(UnLikeApi::class.java)
+
+    val likePhotoInfoApi: LikePhotoInfoApi = retrofit.create(LikePhotoInfoApi::class.java)
 
 }

@@ -29,19 +29,17 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
             viewModel.webLogoutComplete()
         } else {
             // логаут отменен
-            // делаем complete тк github не редиректит после логаута и пользователь закрывает CCT
             viewModel.webLogoutComplete()
         }
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.corruptAccessToken.setOnClickListener {
-            viewModel.corruptAccessToken()
-        }
-       binding.getUserInfo.setOnClickListener {
+
+
            viewModel.loadUserInfo()
-       }
+
 
         binding.logout.setOnClickListener {
             viewModel.logout()
@@ -49,12 +47,16 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
 
         viewModel.loadingFlow.launchAndCollectIn(viewLifecycleOwner) { isLoading ->
             binding.progressBar.isVisible = isLoading
-            binding.getUserInfo.isEnabled = !isLoading
-            binding.userInfo.isVisible = !isLoading
         }
 
        viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
-          binding.userInfo.text = userInfo?.location
+           if (userInfo != null) {
+               binding.userIdData.text = userInfo.id
+               binding.userNameData.text = userInfo.username
+               binding.userEmailData.text = userInfo.email
+               binding.userTotalLikesData.text = userInfo.total_likes
+           }
+
        }
 
         viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {

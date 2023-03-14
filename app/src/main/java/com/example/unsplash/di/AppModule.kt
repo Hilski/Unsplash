@@ -1,5 +1,7 @@
 package com.example.unsplash.di
 
+import android.app.Application
+import androidx.room.Room
 import com.example.unsplash.api.UnsplashApi
 import dagger.Module
 import dagger.Provides
@@ -23,4 +25,5 @@ object AppModule {
     @Singleton
     fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi =
         retrofit.create(UnsplashApi::class.java)
+
 }

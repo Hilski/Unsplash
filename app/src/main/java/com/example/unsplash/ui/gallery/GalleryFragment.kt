@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.unsplash.R
-import com.example.unsplash.data.UnsplashPhoto
+import com.example.unsplash.data.models.UnsplashPhoto
 import com.example.unsplash.databinding.FragmentGalleryBinding
 import com.example.unsplash.ui.NavigationActivity
 import dagger.hilt.android.AndroidEntryPoint

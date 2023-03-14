@@ -8,10 +8,6 @@ import timber.log.Timber
 
 class AuthRepository {
 
-    fun corruptAccessToken() {
-        TokenStorage.accessToken = "fake token"
-    }
-
     fun logout() {
         TokenStorage.accessToken = null
         TokenStorage.tokenType = null

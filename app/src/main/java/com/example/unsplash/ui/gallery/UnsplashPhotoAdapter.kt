@@ -2,13 +2,14 @@ package com.example.unsplash.ui.gallery
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.unsplash.R
-import com.example.unsplash.data.UnsplashPhoto
+import com.example.unsplash.data.models.UnsplashPhoto
 import com.example.unsplash.databinding.ItemUnsplashPhotoBinding
 
 class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :

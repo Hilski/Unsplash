@@ -6,9 +6,9 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.unsplash.R
+import com.example.unsplash.data.UnsplashRepository
 import com.example.unsplash.data.auth.AuthRepository
-import com.example.unsplash.data.github.UserRepository
-import com.example.unsplash.data.github.models.RemoteUser
+import com.example.unsplash.data.models.RemoteUser
 import com.example.unsplash.data.network.RetrofitInstance.interceptor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -19,18 +19,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import net.openid.appauth.AuthorizationService
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 
 @HiltViewModel
-class UserInfoViewModel @Inject constructor(application: Application) :
+class UserInfoViewModel @Inject constructor(private val repository: UnsplashRepository, application: Application) :
     AndroidViewModel(application) {
 
     private val authService: AuthorizationService = AuthorizationService(getApplication())
 
     private val authRepository = AuthRepository()
-    private val userRepository = UserRepository()
 
     private val loadingMutableStateFlow = MutableStateFlow(false)
     private val userInfoMutableStateFlow = MutableStateFlow<RemoteUser?>(null)
@@ -54,16 +52,12 @@ class UserInfoViewModel @Inject constructor(application: Application) :
     val logoutCompletedFlow: Flow<Unit>
         get() = logoutCompletedEventChannel.receiveAsFlow()
 
-    fun corruptAccessToken() {
-        authRepository.corruptAccessToken()
-    }
-
     fun loadUserInfo() {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         viewModelScope.launch {
             loadingMutableStateFlow.value = true
             runCatching {
-                userRepository.getUserInformation()
+                repository.getUserInformation()
             }.onSuccess {
                 userInfoMutableStateFlow.value = it
                 loadingMutableStateFlow.value = false

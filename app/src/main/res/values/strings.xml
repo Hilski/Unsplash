@@ -9,4 +9,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="back">Back</string>
+    <string name="my_liked_photo">My liked photo</string>
+    <string name="likes">Likes: </string>
+    <string name="like_it">Like it</string>
+    <string name="userid">User id</string>
+    <string name="user_name">User Name</string>
+    <string name="user_location">User location</string>
+    <string name="user_total_likes">User total likes</string>
+    <string name="user_email">User email</string>
+    <string name="you_like_it">You like it!</string>
+    <string name="you_un_like_it">You unlike it!</string>
+    <string name="like_error">Like error</string>
+    <string name="unlike_error">Unlike error</string>
+    <string name="unlike_it">Unlike it</string>
+    <string name="like_info_error">Like info error</string>
+    <string name="like">Like</string>
 </resources>

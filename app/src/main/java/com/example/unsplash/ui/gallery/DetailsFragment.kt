@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -16,31 +17,50 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
-
 import com.example.unsplash.databinding.FragmentDetailsBinding
 import com.example.unsplash.ui.NavigationActivity
+import com.example.unsplash.utils.launchAndCollectIn
+import com.example.unsplash.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
+    private val viewModel by viewModels<DetailsViewModel>()
     private val args by navArgs<DetailsFragmentArgs>()
+    private var photoLiked: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentDetailsBinding.bind(view)
 
+        viewModel.likePhotoInfo(args.photo.id)
+        viewModel.likeItInfoFlow.launchAndCollectIn(viewLifecycleOwner) { likePhotoInfo ->
+            if (likePhotoInfo != null) {
+                binding.textViewLike.isVisible = likePhotoInfo.liked_by_user
+                photoLiked = likePhotoInfo.liked_by_user
+            }
+        }
 
+        viewModel.likeItFlow.launchAndCollectIn(viewLifecycleOwner) { likedPhoto ->
+            if (likedPhoto != null) {
+                binding.textViewLike.isVisible = likedPhoto.photo.liked_by_user
+                photoLiked = likedPhoto.photo.liked_by_user
+            }
+        }
+
+        viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {
+            toast(it)
+        }
 
         binding.apply {
             val photo = args.photo
-
             Glide.with(this@DetailsFragment)
                 //full очень большая для показа прогресса загрузки, regular меньше
                 .load(photo.urls.full)
                 .error(R.drawable.ic_error)
-                .listener(object : RequestListener<Drawable>{
+                .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,
                         model: Any?,
@@ -61,16 +81,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
                         textViewDescription.isVisible = photo.description != null
-//                        textViewExifModel.isVisible = photo.description != null
-                        textViewExifModel.isVisible = true
+
                         return false
                     }
-
                 })
                 .into(imageView)
 
             textViewDescription.text = photo.description
-           textViewExifModel.text = photo.exif?.make ?: "qwerty"
+            textViewLikesData.text = photo.likes
 
             val uri = Uri.parse(photo.user.attributionUrl)
             val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -81,6 +99,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     context.startActivity(intent)
                 }
                 paint.isUnderlineText = true
+            }
+
+            likeItButton.setOnClickListener {
+                if (photoLiked) {
+                    viewModel.unlikePhoto(photo.id)
+                } else {
+                    viewModel.likePhoto(photo.id)
+                }
             }
         }
     }
