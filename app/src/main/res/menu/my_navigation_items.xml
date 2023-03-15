@@ -5,7 +5,7 @@
         android:icon="@drawable/photo"
         android:title="Photo" />
     <item
-        android:id="@+id/userInfo"
+        android:id="@+id/collectionsFragment"
         android:icon="@drawable/photo_library"
         android:title="Collections" />
     <item

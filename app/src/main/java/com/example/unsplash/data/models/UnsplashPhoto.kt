@@ -24,6 +24,7 @@ data class UnsplashPhoto(
         val focal_length: String?,
         val iso: String?
     ) : Parcelable
+
     @Parcelize
     data class UnsplashLocation(
         val city: String?,

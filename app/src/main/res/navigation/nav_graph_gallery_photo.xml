@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_gallery_photo"
-    app:startDestination="@id/userInfoFragment">
+    app:startDestination="@id/collectionsFragment">
 
     <fragment
         android:id="@+id/userInfoFragment"
@@ -11,7 +11,6 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.unsplash.ui.gallery.DetailsFragment"
-
         tools:layout="@layout/fragment_details">
         <argument
             android:name="photo"
@@ -27,6 +26,28 @@
         tools:layout="@layout/fragment_gallery">
         <action
             android:id="@+id/action_galleryFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectionsFragment"
+        android:name="com.example.unsplash.ui.gallery.CollectionsFragment"
+        tools:layout="@layout/fragment_collections">
+        <action
+            android:id="@+id/action_collectionsFragment_to_detailsCollectionFragment"
+            app:destination="@id/detailsCollectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsCollectionFragment"
+        android:name="com.example.unsplash.ui.gallery.DetailsCollectionFragment"
+        tools:layout="@layout/fragment_details_collection">
+        <argument
+            android:name="collections"
+            app:argType="com.example.unsplash.data.models.CollectionsPhoto" />
+        <action
+            android:id="@+id/action_detailsCollectionFragment_to_collectionsFragment"
+            app:destination="@id/collectionsFragment" />
+        <action
+            android:id="@+id/action_detailsCollectionFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>
