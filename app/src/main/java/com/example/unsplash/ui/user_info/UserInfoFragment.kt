@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,7 +26,7 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
     private val logoutResponse = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if(result.resultCode == Activity.RESULT_OK) {
+        if (result.resultCode == Activity.RESULT_OK) {
             viewModel.webLogoutComplete()
         } else {
             // логаут отменен
@@ -38,8 +39,14 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
         super.onViewCreated(view, savedInstanceState)
 
 
-           viewModel.loadUserInfo()
+        viewModel.loadUserInfo()
 
+        binding.myLikedPhoto.setOnClickListener {
+            findNavController().navigate(R.id.action_userInfoFragment_to_myLikedPhotoFragment,
+            bundleOf(
+                "usermame" to binding.userNameData.text
+                ))
+        }
 
         binding.logout.setOnClickListener {
             viewModel.logout()
@@ -49,15 +56,15 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
             binding.progressBar.isVisible = isLoading
         }
 
-       viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
-           if (userInfo != null) {
-               binding.userIdData.text = userInfo.id
-               binding.userNameData.text = userInfo.username
-               binding.userEmailData.text = userInfo.email
-               binding.userTotalLikesData.text = userInfo.total_likes
-           }
+        viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
+            if (userInfo != null) {
+                binding.userIdData.text = userInfo.id
+                binding.userNameData.text = userInfo.username
+                binding.userEmailData.text = userInfo.email
+                binding.userTotalLikesData.text = userInfo.total_likes
+            }
 
-       }
+        }
 
         viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {
             toast(it)

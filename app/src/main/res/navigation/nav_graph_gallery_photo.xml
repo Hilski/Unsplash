@@ -26,7 +26,11 @@
         android:id="@+id/userInfoFragment"
         android:name="com.example.unsplash.ui.user_info.UserInfoFragment"
         android:label="fragment_user_info"
-        tools:layout="@layout/fragment_user_info" />
+        tools:layout="@layout/fragment_user_info" >
+        <action
+            android:id="@+id/action_userInfoFragment_to_myLikedPhotoFragment"
+            app:destination="@id/myLikedPhotoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.unsplash.ui.gallery.DetailsFragment"
@@ -40,5 +44,23 @@
         android:id="@+id/detailsCollectionFragment"
         android:name="com.example.unsplash.ui.gallery.DetailsCollectionFragment"
         android:label="fragment_details_collection"
-        tools:layout="@layout/fragment_details_collection" />
+        tools:layout="@layout/fragment_details_collection" >
+        <action
+            android:id="@+id/action_detailsCollectionFragment_to_collectionDetailsPhotoFragment"
+            app:destination="@id/collectionDetailsPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectionDetailsPhotoFragment"
+        android:name="com.example.unsplash.ui.gallery.CollectionDetailsPhotoFragment"
+        android:label="fragment_collection_details_photo"
+        tools:layout="@layout/fragment_collection_details_photo" />
+    <fragment
+        android:id="@+id/myLikedPhotoFragment"
+        android:name="com.example.unsplash.ui.gallery.MyLikedPhotoFragment"
+        android:label="fragment_my_liked_photo"
+        tools:layout="@layout/fragment_my_liked_photo" >
+        <action
+            android:id="@+id/action_myLikedPhotoFragment_to_collectionDetailsPhotoFragment"
+            app:destination="@id/collectionDetailsPhotoFragment" />
+    </fragment>
 </navigation>

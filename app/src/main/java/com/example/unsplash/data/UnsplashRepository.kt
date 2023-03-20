@@ -18,9 +18,30 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
         return unsplashApi.searchPhotos(query, position, params, token)
     }
 
-    suspend fun collectionsResponse(query: String, position: Int, params: Int): CollectionsResponse {
+    suspend fun collectionsResponse(
+        query: String,
+        position: Int,
+        params: Int
+    ): CollectionsResponse {
         return unsplashApi.searchCollections(query, position, params, token)
     }
+
+    suspend fun getCollectionPhotoResponse(
+        id: String,
+        position: Int,
+        params: Int
+    ): List<GetCollectionsPhoto> {
+        return unsplashApi.getCollectionPhotos(id, position, params, token)
+    }
+
+    suspend fun getMyLikedPhotosResults(
+        username: String,
+        position: Int,
+        params: Int
+    ): List<MyLikedPhoto> {
+        return unsplashApi.getMyLikedPhotos(username, position, params, token)
+    }
+
 
     fun getSearchResults(query: String) =
         Pager(
@@ -29,7 +50,29 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(unsplashApi, query, UnsplashRepository(unsplashApi)) }
+            pagingSourceFactory = {
+                UnsplashPagingSource(
+                    unsplashApi,
+                    query,
+                    UnsplashRepository(unsplashApi)
+                )
+            }
+        ).liveData
+
+    fun getSearchMyLikedPhotosResults(query: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                MyLikedPhotosPagingSource(
+                    unsplashApi,
+                    query,
+                    UnsplashRepository(unsplashApi)
+                )
+            }
         ).liveData
 
     fun getSearchCollectionsResults(query: String) =
@@ -39,11 +82,32 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { CollectionsPagingSource(unsplashApi, query, UnsplashRepository(unsplashApi)) }
+            pagingSourceFactory = {
+                CollectionsPagingSource(
+                    unsplashApi,
+                    query,
+                    UnsplashRepository(unsplashApi)
+                )
+            }
+        ).liveData
+
+    fun getSearchDetailsCollectionsResults(id: String) =
+        Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                maxSize = 100,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                GetCollectionPhotosPagingSource(
+                    unsplashApi,
+                    id,
+                    UnsplashRepository(unsplashApi)
+                )
+            }
         ).liveData
 
     suspend fun getUserInformation(): RemoteUser {
-
         return RetrofitInstance.userApi.getCurrentUser(token)
     }
 
@@ -58,4 +122,9 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
     suspend fun unlikePhoto(idPhoto: String): LikeIt {
         return RetrofitInstance.UnlikeApi.UnlikePhoto(idPhoto, token)
     }
+
+    suspend fun getCollectionDetailsPhoto(idPhoto: String): CollectionDetailsPhoto {
+        return unsplashApi.getCollectionDetailsPhotos(idPhoto, token)
+    }
+
 }

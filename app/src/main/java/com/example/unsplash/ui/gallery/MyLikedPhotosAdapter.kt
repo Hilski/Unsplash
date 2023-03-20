@@ -8,19 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.unsplash.R
-import com.example.unsplash.data.models.UnsplashPhoto
+import com.example.unsplash.data.models.MyLikedPhoto
+import com.example.unsplash.databinding.ItemMyLikedPhotoBinding
 import com.example.unsplash.databinding.ItemUnsplashPhotoBinding
 
-class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
+class MyLikedPhotosAdapter (private val listener: OnItemClickListener) :
+    PagingDataAdapter<MyLikedPhoto, MyLikedPhotosAdapter.MyLikedViewHolder>(PHOTO_COMPARATOR) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyLikedViewHolder {
         val binding =
-            ItemUnsplashPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PhotoViewHolder(binding)
+            ItemMyLikedPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyLikedViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyLikedViewHolder, position: Int) {
         val currentItem = getItem(position)
 
         if (currentItem != null) {
@@ -28,7 +29,7 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
         }
     }
 
-    inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
+    inner class MyLikedViewHolder(private val binding: ItemMyLikedPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -43,7 +44,7 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
             }
         }
 
-        fun bind(photo: UnsplashPhoto) {
+        fun bind(photo: MyLikedPhoto) {
             binding.apply {
                 Glide.with(itemView)
                     .load(photo.urls.regular)
@@ -67,24 +68,24 @@ class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
                         .error(R.drawable.ic_error)
                         .into(imageViewMyLike)
                 }
-                textViewUserName.text = photo.user.username
-                textViewLikes.text = photo.likes
+             textViewUserName.text = photo.user.username
+                textViewLikes.text = photo.likes.toString()
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(photo: UnsplashPhoto)
+        fun onItemClick(photo: MyLikedPhoto)
     }
 
     companion object {
-        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<UnsplashPhoto>() {
-            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) =
+        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<MyLikedPhoto>() {
+            override fun areItemsTheSame(oldItem: MyLikedPhoto, newItem: MyLikedPhoto) =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: UnsplashPhoto,
-                newItem: UnsplashPhoto
+                oldItem: MyLikedPhoto,
+                newItem: MyLikedPhoto
             ) = oldItem == newItem
         }
     }

@@ -2,7 +2,6 @@ package com.example.unsplash.ui.gallery
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -12,25 +11,27 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.unsplash.R
 import com.example.unsplash.data.models.CollectionsPhoto
+import com.example.unsplash.data.models.GetCollectionsPhoto
+import com.example.unsplash.data.models.MyLikedPhoto
 import com.example.unsplash.databinding.FragmentCollectionsBinding
+import com.example.unsplash.databinding.FragmentDetailsCollectionBinding
+import com.example.unsplash.databinding.FragmentMyLikedPhotoBinding
 import com.example.unsplash.ui.NavigationActivity
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class CollectionsFragment : Fragment(R.layout.fragment_collections),
-   CollectionsPhotoAdapter.OnItemClickListener {
+class MyLikedPhotoFragment : Fragment(R.layout.fragment_my_liked_photo),
+    MyLikedPhotosAdapter.OnItemClickListener {
 
-    private val viewModel by viewModels<CollectionsViewModel>()
-    private var _binding: FragmentCollectionsBinding? = null
+    private val viewModel by viewModels<MyLikedPhotosViewModel>()
+    private var _binding: FragmentMyLikedPhotoBinding? = null
     private val binding get() = _binding!!
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentCollectionsBinding.bind(view)
-
-        val adapter = CollectionsPhotoAdapter(this)
+        _binding = FragmentMyLikedPhotoBinding.bind(view)
+        arguments?.getString("usermame")?.let { viewModel.myLikedPhotoUsername(it) }
+        val adapter = MyLikedPhotosAdapter(this)
 
         binding.apply {
             recyclerView.setHasFixedSize(true)
@@ -67,33 +68,14 @@ class CollectionsFragment : Fragment(R.layout.fragment_collections),
                 }
             }
         }
-        setHasOptionsMenu(true)
     }
 
-    override fun onItemClick(collections: CollectionsPhoto) {
-        findNavController().navigate(R.id.action_collectionsFragment_to_detailsCollectionFragment, bundleOf("idCollection" to collections.id))
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_gallery, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    binding.recyclerView.scrollToPosition(0)
-                    viewModel.searchCollections(query)
-                    searchView.clearFocus()
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
+    //СКОРРЕКТИРОВАТЬ НАЖАТИЕ НА КАРТИНКУ(НИЖЕ)
+    override fun onItemClick(collections: MyLikedPhoto) {
+        findNavController().navigate(
+            R.id.action_myLikedPhotoFragment_to_collectionDetailsPhotoFragment,
+            bundleOf("idPhoto" to collections.id)
+        )
     }
 
     override fun onCreateView(
@@ -101,7 +83,7 @@ class CollectionsFragment : Fragment(R.layout.fragment_collections),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as NavigationActivity).supportActionBar?.show()
+        //  (activity as NavigationActivity).supportActionBar?.show()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -109,4 +91,5 @@ class CollectionsFragment : Fragment(R.layout.fragment_collections),
         super.onDestroyView()
         _binding = null
     }
+
 }

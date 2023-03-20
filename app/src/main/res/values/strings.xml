@@ -25,4 +25,5 @@
     <string name="like_info_error">Like info error</string>
     <string name="like">Like</string>
     <string name="save">Save</string>
+    <string name="get_photo_error">Get photo error</string>
 </resources>
