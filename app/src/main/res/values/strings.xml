@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mysplash</string>
-    <string name="auth_login">Войти</string>
-    <string name="auth_canceled">Аутентификация не выполнена</string>
+    <string name="auth_login">Login</string>
+    <string name="auth_canceled">Authentication failed</string>
     <string name="corrupt_access_token">Corrupt access token</string>
     <string name="get_user_info">Get user info</string>
     <string name="get_user_error">Get user error</string>
@@ -27,4 +27,11 @@
     <string name="save">Save</string>
     <string name="get_photo_error">Get photo error</string>
     <string name="photo_by">Photo by</string>
+    <string name="results_could_not_be_loaded">Results could not be loaded</string>
+    <string name="retry">Retry</string>
+    <string name="no_results_found_fore_this_query">No results found fore this query</string>
+    <string name="search">Search</string>
+    <string name="photo">Photo</string>
+    <string name="collections">Collections</string>
+    <string name="user">User</string>
 </resources>

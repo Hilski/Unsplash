@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mysplash</string>
+    <string name="auth_login">Вход</string>
+    <string name="auth_canceled">Аутентификация не выполнена</string>
+    <string name="corrupt_access_token">Поврежден токен доступа</string>
+    <string name="get_user_info">Получена информация пользователя</string>
+    <string name="get_user_error">Ошибка получения информации пользователя</string>
+    <string name="logout">Выход</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Приветственый фрагмент</string>
+    <string name="back">Назад</string>
+    <string name="my_liked_photo">Мои лайкнутые фото</string>
+    <string name="likes">Лайки: </string>
+    <string name="like_it">Лайк</string>
+    <string name="userid">id</string>
+    <string name="user_name">Имя</string>
+    <string name="user_location">Локация пользователя</string>
+    <string name="user_total_likes">Всего лайков</string>
+    <string name="user_email">email</string>
+    <string name="you_like_it">Ты лайкнул его!</string>
+    <string name="you_un_like_it">Ты убрал лайк!</string>
+    <string name="like_error">Ошибка лайка</string>
+    <string name="unlike_error">Ошибка снятия лайка</string>
+    <string name="unlike_it">Снять лайк</string>
+    <string name="like_info_error">Ошибка информации о лайке</string>
+    <string name="like">Лайк</string>
+    <string name="save">Сохранить</string>
+    <string name="get_photo_error">Ошибка получения фото</string>
+    <string name="photo_by">Фото</string>
+    <string name="results_could_not_be_loaded">Результаты немогут быть загружены</string>
+    <string name="retry">Retry</string>
+    <string name="no_results_found_fore_this_query">Ненайдено результатов для этого запроса</string>
+    <string name="search">Поиск</string>
+    <string name="photo">Фото</string>
+    <string name="collections">Коллекции</string>
+    <string name="user">Пользователь</string>
+</resources>

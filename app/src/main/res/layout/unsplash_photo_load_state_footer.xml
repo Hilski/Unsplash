@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/text_view_error"
-        android:text="Results could not be loaded"
+        android:text="@string/results_could_not_be_loaded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -21,5 +21,5 @@
         android:id="@+id/button_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry"/>
+        android:text="@string/retry"/>
 </LinearLayout>
