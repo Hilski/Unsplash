@@ -9,13 +9,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.unsplash.R
 import com.example.unsplash.data.models.GetCollectionsPhoto
-import com.example.unsplash.databinding.ItemColectionsBinding
 import com.example.unsplash.databinding.ItemUnsplashPhotoBinding
 
 class DetailsCollectionsPhotoAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<GetCollectionsPhoto, DetailsCollectionsPhotoAdapter.DetailsCollectionsViewHolder>(PHOTO_COMPARATOR) {
+    PagingDataAdapter<GetCollectionsPhoto, DetailsCollectionsPhotoAdapter.DetailsCollectionsViewHolder>(
+        PHOTO_COMPARATOR
+    ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsCollectionsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): DetailsCollectionsViewHolder {
         val binding =
             ItemUnsplashPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DetailsCollectionsViewHolder(binding)
@@ -80,7 +84,10 @@ class DetailsCollectionsPhotoAdapter(private val listener: OnItemClickListener) 
 
     companion object {
         private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<GetCollectionsPhoto>() {
-            override fun areItemsTheSame(oldItem: GetCollectionsPhoto, newItem: GetCollectionsPhoto) =
+            override fun areItemsTheSame(
+                oldItem: GetCollectionsPhoto,
+                newItem: GetCollectionsPhoto
+            ) =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(

@@ -23,6 +23,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentDetailsBinding
+
 import com.example.unsplash.ui.NavigationActivity
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.toast
@@ -62,7 +63,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.apply {
             val photo = args.photo
             Glide.with(this@DetailsFragment)
-                //full очень большая для показа прогресса загрузки, regular меньше
                 .load(photo.urls.regular)
                 .error(R.drawable.ic_error)
                 .listener(object : RequestListener<Drawable> {
@@ -86,7 +86,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
                         textViewDescription.isVisible = photo.description != null
-
                         return false
                     }
                 })
@@ -99,7 +98,11 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             val intent = Intent(Intent.ACTION_VIEW, uri)
 
             textViewCreator.apply {
-                text = "Photo by ${photo.user.name} on Unsplash"
+                text = buildString {
+                    append(context.getString(R.string.photo_by))
+                    append(" ")
+                    append(photo.user.name)
+                }
                 setOnClickListener {
                     context.startActivity(intent)
                 }
@@ -145,6 +148,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             }
         }
     }
+
     fun saveImageToGallery(bitmap: Bitmap, filename: String) {
         val d = MediaStore.Images.Media.insertImage(
             activity?.contentResolver,
@@ -154,6 +158,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         );
         Toast.makeText(context, d, Toast.LENGTH_SHORT).show()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -2,7 +2,6 @@ package com.example.unsplash.ui.gallery
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.core.view.isVisible
@@ -10,13 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.unsplash.R
-import com.example.unsplash.data.models.CollectionsPhoto
-import com.example.unsplash.data.models.GetCollectionsPhoto
 import com.example.unsplash.data.models.MyLikedPhoto
-import com.example.unsplash.databinding.FragmentCollectionsBinding
-import com.example.unsplash.databinding.FragmentDetailsCollectionBinding
 import com.example.unsplash.databinding.FragmentMyLikedPhotoBinding
-import com.example.unsplash.ui.NavigationActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,11 +64,10 @@ class MyLikedPhotoFragment : Fragment(R.layout.fragment_my_liked_photo),
         }
     }
 
-    //СКОРРЕКТИРОВАТЬ НАЖАТИЕ НА КАРТИНКУ(НИЖЕ)
-    override fun onItemClick(collections: MyLikedPhoto) {
+    override fun onItemClick(photo: MyLikedPhoto) {
         findNavController().navigate(
             R.id.action_myLikedPhotoFragment_to_collectionDetailsPhotoFragment,
-            bundleOf("idPhoto" to collections.id)
+            bundleOf("idPhoto" to photo.id)
         )
     }
 
@@ -83,7 +76,6 @@ class MyLikedPhotoFragment : Fragment(R.layout.fragment_my_liked_photo),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //  (activity as NavigationActivity).supportActionBar?.show()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -91,5 +83,4 @@ class MyLikedPhotoFragment : Fragment(R.layout.fragment_my_liked_photo),
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -23,19 +23,19 @@ import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 
 @HiltViewModel
-class UserInfoViewModel @Inject constructor(private val repository: UnsplashRepository, application: Application) :
+class UserInfoViewModel @Inject constructor(
+    private val repository: UnsplashRepository,
+    application: Application
+) :
     AndroidViewModel(application) {
 
     private val authService: AuthorizationService = AuthorizationService(getApplication())
-
     private val authRepository = AuthRepository()
-
     private val loadingMutableStateFlow = MutableStateFlow(false)
     private val userInfoMutableStateFlow = MutableStateFlow<RemoteUser?>(null)
     private val toastEventChannel = Channel<Int>(Channel.BUFFERED)
     private val logoutPageEventChannel = Channel<Intent>(Channel.BUFFERED)
     private val logoutCompletedEventChannel = Channel<Unit>(Channel.BUFFERED)
-
 
     val loadingFlow: Flow<Boolean>
         get() = loadingMutableStateFlow.asStateFlow()
@@ -68,7 +68,6 @@ class UserInfoViewModel @Inject constructor(private val repository: UnsplashRepo
             }
         }
     }
-
 
     fun logout() {
         val customTabsIntent = CustomTabsIntent.Builder().build()

@@ -47,7 +47,6 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         }
         viewModel.authSuccessFlow.launchAndCollectIn(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_authFragment_to_navigationActivity)
- //           findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToRepositoryListFragment())
         }
     }
 

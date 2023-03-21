@@ -38,14 +38,15 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.loadUserInfo()
 
         binding.myLikedPhoto.setOnClickListener {
-            findNavController().navigate(R.id.action_userInfoFragment_to_myLikedPhotoFragment,
-            bundleOf(
-                "usermame" to binding.userNameData.text
-                ))
+            findNavController().navigate(
+                R.id.action_userInfoFragment_to_myLikedPhotoFragment,
+                bundleOf(
+                    "usermame" to binding.userNameData.text
+                )
+            )
         }
 
         binding.logout.setOnClickListener {

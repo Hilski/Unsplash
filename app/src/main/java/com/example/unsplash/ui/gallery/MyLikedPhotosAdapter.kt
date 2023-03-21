@@ -10,9 +10,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.unsplash.R
 import com.example.unsplash.data.models.MyLikedPhoto
 import com.example.unsplash.databinding.ItemMyLikedPhotoBinding
-import com.example.unsplash.databinding.ItemUnsplashPhotoBinding
 
-class MyLikedPhotosAdapter (private val listener: OnItemClickListener) :
+class MyLikedPhotosAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<MyLikedPhoto, MyLikedPhotosAdapter.MyLikedViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyLikedViewHolder {
@@ -68,7 +67,7 @@ class MyLikedPhotosAdapter (private val listener: OnItemClickListener) :
                         .error(R.drawable.ic_error)
                         .into(imageViewMyLike)
                 }
-             textViewUserName.text = photo.user.username
+                textViewUserName.text = photo.user.username
                 textViewLikes.text = photo.likes.toString()
             }
         }

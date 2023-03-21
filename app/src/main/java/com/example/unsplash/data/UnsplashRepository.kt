@@ -42,7 +42,6 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
         return unsplashApi.getMyLikedPhotos(username, position, params, token)
     }
 
-
     fun getSearchResults(query: String) =
         Pager(
             config = PagingConfig(
@@ -120,11 +119,10 @@ class UnsplashRepository @Inject constructor(private val unsplashApi: UnsplashAp
     }
 
     suspend fun unlikePhoto(idPhoto: String): LikeIt {
-        return RetrofitInstance.UnlikeApi.UnlikePhoto(idPhoto, token)
+        return RetrofitInstance.UnlikeApi.unlikePhoto(idPhoto, token)
     }
 
     suspend fun getCollectionDetailsPhoto(idPhoto: String): CollectionDetailsPhoto {
         return unsplashApi.getCollectionDetailsPhotos(idPhoto, token)
     }
-
 }

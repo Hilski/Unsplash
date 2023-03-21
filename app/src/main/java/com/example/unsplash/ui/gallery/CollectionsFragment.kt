@@ -2,7 +2,6 @@ package com.example.unsplash.ui.gallery
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -15,7 +14,6 @@ import com.example.unsplash.data.models.CollectionsPhoto
 import com.example.unsplash.databinding.FragmentCollectionsBinding
 import com.example.unsplash.ui.NavigationActivity
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CollectionsFragment : Fragment(R.layout.fragment_collections),

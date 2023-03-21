@@ -26,4 +26,5 @@
     <string name="like">Like</string>
     <string name="save">Save</string>
     <string name="get_photo_error">Get photo error</string>
+    <string name="photo_by">Photo by</string>
 </resources>

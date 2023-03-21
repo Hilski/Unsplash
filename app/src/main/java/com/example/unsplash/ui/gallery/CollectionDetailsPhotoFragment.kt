@@ -33,7 +33,7 @@ class CollectionDetailsPhotoFragment : Fragment() {
     private var _binding: FragmentCollectionDetailsPhotoBinding? = null
     private val binding get() = _binding!!
     private var photoLiked: Boolean = false
-    var getPhoto : CollectionDetailsPhoto? = null
+    private var getPhoto : CollectionDetailsPhoto? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -144,7 +144,6 @@ class CollectionDetailsPhotoFragment : Fragment() {
                     ): Boolean {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
-  //                      textViewDescription.isVisible = (getPhoto?.description ?:  false) as Boolean
                         return false
                     }
                 })

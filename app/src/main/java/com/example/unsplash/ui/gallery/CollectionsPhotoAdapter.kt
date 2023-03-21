@@ -10,8 +10,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.unsplash.R
 import com.example.unsplash.data.models.CollectionsPhoto
 import com.example.unsplash.databinding.ItemColectionsBinding
-import com.example.unsplash.databinding.ItemUnsplashPhotoBinding
-
 
 class CollectionsPhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<CollectionsPhoto, CollectionsPhotoAdapter.CollectionsViewHolder>(PHOTO_COMPARATOR) {
