@@ -34,4 +34,14 @@
     <string name="photo">Photo</string>
     <string name="collections">Collections</string>
     <string name="user">User</string>
+    <string name="photos">Photos</string>
+    <string name="gallery">Gallery</string>
+    <string name="search_best_photos">Search best photos</string>
+    <string name="choose_best_collections">Choose best collections</string>
+    <string name="save_best_to_gallery">Save the best photos to favorites or download them to your gallery</string>
+    <string name="skip">Skip</string>
+    <string name="get_started">Get Started</string>
+
+
+
 </resources>

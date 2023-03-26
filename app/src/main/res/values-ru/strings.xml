@@ -35,4 +35,11 @@
     <string name="photo">Фото</string>
     <string name="collections">Коллекции</string>
     <string name="user">Пользователь</string>
+    <string name="photos">Фотографии</string>
+    <string name="gallery">Галлерея</string>
+    <string name="search_best_photos">Ищи лучшие фоторграфии</string>
+    <string name="choose_best_collections">Выбирай лучшие коллекции</string>
+    <string name="save_best_to_gallery">Сохраняй лучшие фотографии в избранное или скачивай в свою галлерею</string>
+    <string name="skip">Пропустить</string>
+    <string name="get_started">Начать</string>
 </resources>

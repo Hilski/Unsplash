@@ -1,6 +1,7 @@
 package com.example.unsplash.ui.user_info
 
 import android.app.Activity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,8 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentUserInfoBinding
+
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.resetNavGraph
 import com.example.unsplash.utils.toast
@@ -59,12 +66,18 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
 
         viewModel.userInfoFlow.launchAndCollectIn(viewLifecycleOwner) { userInfo ->
             if (userInfo != null) {
-                binding.userIdData.text = userInfo.id
-                binding.userNameData.text = userInfo.username
-                binding.userEmailData.text = userInfo.email
-                binding.userTotalLikesData.text = userInfo.total_likes
-            }
+                binding.apply {
+                    userIdData.text = userInfo.id
+                    userNameData.text = userInfo.username
+                    userEmailData.text = userInfo.email
+                    userTotalLikesData.text = userInfo.total_likes
 
+                    Glide.with(this@UserInfoFragment)
+                        .load(userInfo.profile_image.large)
+                        .error(R.drawable.ic_error)
+                        .into(imageViewProfile)
+                }
+            }
         }
 
         viewModel.toastFlow.launchAndCollectIn(viewLifecycleOwner) {

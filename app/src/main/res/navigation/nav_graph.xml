@@ -18,4 +18,9 @@
         android:name="com.example.unsplash.ui.NavigationActivity"
         android:label="activity_navigation"
         tools:layout="@layout/activity_navigation" />
+    <activity
+        android:id="@+id/onboardingActivity2"
+        android:name="com.example.unsplash.ui.OnboardingActivity"
+        android:label="activity_onboarding"
+        tools:layout="@layout/activity_onboarding" />
 </navigation>
