@@ -41,6 +41,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         val binding = FragmentDetailsBinding.bind(view)
 
+        binding.apply {
+            likeItButton.isVisible = false
+            saveItButton.isVisible = false
+            shareItButton.isVisible = false
+            textViewLikes.isVisible = false
+            textViewLikesData.isVisible = false
+            textViewLike.isVisible = false
+        }
+
         viewModel.likePhotoInfo(args.photo.id)
         viewModel.likeItInfoFlow.launchAndCollectIn(viewLifecycleOwner) { likePhotoInfo ->
             if (likePhotoInfo != null) {
@@ -86,6 +95,12 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
                         textViewDescription.isVisible = photo.description != null
+                        likeItButton.isVisible = true
+                        saveItButton.isVisible = true
+                        shareItButton.isVisible = true
+                        textViewLikes.isVisible = true
+                        textViewLikesData.isVisible = true
+                        textViewLike.isVisible = true
                         return false
                     }
                 })
@@ -145,6 +160,13 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                             ).show()
                         }
                     })
+            }
+            shareItButton.setOnClickListener {
+                val intent = Intent()
+                intent.action = Intent.ACTION_SEND
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT, "https://unsplash.com/photos/${photo.id}");
+                startActivity(Intent.createChooser(intent, "Choose one"))
             }
         }
     }

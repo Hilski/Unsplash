@@ -11,7 +11,11 @@
         tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_galleryFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/collectionsFragment"
@@ -20,7 +24,11 @@
         tools:layout="@layout/fragment_collections" >
         <action
             android:id="@+id/action_collectionsFragment_to_detailsCollectionFragment"
-            app:destination="@id/detailsCollectionFragment" />
+            app:destination="@id/detailsCollectionFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -29,7 +37,11 @@
         tools:layout="@layout/fragment_user_info" >
         <action
             android:id="@+id/action_userInfoFragment_to_myLikedPhotoFragment"
-            app:destination="@id/myLikedPhotoFragment" />
+            app:destination="@id/myLikedPhotoFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -47,7 +59,11 @@
         tools:layout="@layout/fragment_details_collection" >
         <action
             android:id="@+id/action_detailsCollectionFragment_to_collectionDetailsPhotoFragment"
-            app:destination="@id/collectionDetailsPhotoFragment" />
+            app:destination="@id/collectionDetailsPhotoFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/collectionDetailsPhotoFragment"
@@ -61,6 +77,10 @@
         tools:layout="@layout/fragment_my_liked_photo" >
         <action
             android:id="@+id/action_myLikedPhotoFragment_to_collectionDetailsPhotoFragment"
-            app:destination="@id/collectionDetailsPhotoFragment" />
+            app:destination="@id/collectionDetailsPhotoFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>

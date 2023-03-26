@@ -79,7 +79,8 @@
                 android:layout_marginStart="20dp"
                 android:text="@string/like"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_likes" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_likes"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/text_view_like"
@@ -87,9 +88,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:textColor="@android:color/black"
+                app:drawableStartCompat="@drawable/ic_favorite"
                 app:layout_constraintStart_toEndOf="@+id/like_it_button"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_likes"
-                app:drawableStartCompat="@drawable/ic_favorite"/>
+                app:layout_constraintTop_toBottomOf="@+id/text_view_likes" />
 
             <Button
                 android:id="@+id/save_it_button"
@@ -99,7 +100,16 @@
                 android:text="@string/save"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/like_it_button" />
- />
+
+            <Button
+                android:id="@+id/share_it_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/share_it"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/save_it_button" />
+            />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

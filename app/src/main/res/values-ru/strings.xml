@@ -42,4 +42,5 @@
     <string name="save_best_to_gallery">Сохраняй лучшие фотографии в избранное или скачивай в свою галлерею</string>
     <string name="skip">Пропустить</string>
     <string name="get_started">Начать</string>
+    <string name="share_it">Поделиться</string>
 </resources>

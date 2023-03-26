@@ -1,5 +1,6 @@
 package com.example.unsplash.ui.gallery
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -33,7 +34,7 @@ class CollectionDetailsPhotoFragment : Fragment() {
     private var _binding: FragmentCollectionDetailsPhotoBinding? = null
     private val binding get() = _binding!!
     private var photoLiked: Boolean = false
-    private var getPhoto : CollectionDetailsPhoto? = null
+    private var getPhoto: CollectionDetailsPhoto? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +48,16 @@ class CollectionDetailsPhotoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val idPhoto: String = arguments?.getString("idPhoto") ?: ""
+
+        binding.apply {
+            likeItButton.isVisible = false
+            saveItButton.isVisible = false
+            shareItButton.isVisible = false
+            textViewLikes.isVisible = false
+            textViewLikesData.isVisible = false
+            textViewLike.isVisible = false
+
+        }
 
         viewModel.likePhotoInfo(idPhoto)
         viewModel.getPhoto(idPhoto)
@@ -86,8 +97,10 @@ class CollectionDetailsPhotoFragment : Fragment() {
 
         //Сохраняем изображение в галлерею
         binding.saveItButton.setOnClickListener {
-            val fileName = getPhoto?.urls?.regular?.substring((getPhoto?.urls?.regular?.lastIndexOf('/')
-                ?: 0) + 1)
+            val fileName = getPhoto?.urls?.regular?.substring(
+                (getPhoto?.urls?.regular?.lastIndexOf('/')
+                    ?: 0) + 1
+            )
 
             Glide.with(this@CollectionDetailsPhotoFragment)
                 .load(getPhoto?.urls?.regular)
@@ -115,6 +128,13 @@ class CollectionDetailsPhotoFragment : Fragment() {
                         ).show()
                     }
                 })
+        }
+        binding.shareItButton.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "https://unsplash.com/photos/$idPhoto");
+            startActivity(Intent.createChooser(intent, "Choose one"))
         }
     }
 
@@ -144,6 +164,12 @@ class CollectionDetailsPhotoFragment : Fragment() {
                     ): Boolean {
                         progressBar.isVisible = false
                         textViewCreator.isVisible = true
+                        likeItButton.isVisible = true
+                        saveItButton.isVisible = true
+                        shareItButton.isVisible = true
+                        textViewLikes.isVisible = true
+                        textViewLikesData.isVisible = true
+                        textViewLike.isVisible = true
                         return false
                     }
                 })
