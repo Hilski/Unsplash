@@ -6,10 +6,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -21,6 +23,7 @@ object AppModule {
             .baseUrl(UnsplashApi.BASE_URL).client(RetrofitInstance.client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
     @Provides
     @Singleton
     fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi =

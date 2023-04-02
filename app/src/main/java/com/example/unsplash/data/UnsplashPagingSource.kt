@@ -9,6 +9,7 @@ import java.io.IOException
 
 private const val UNSPLASH_STARTING_PAGE_INDEX = 1
 
+//Использовался до подключения BD ROOM через RemoteMediator
 class UnsplashPagingSource(
     private val unsplashApi: UnsplashApi,
     private val query: String,

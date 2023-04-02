@@ -1,20 +1,31 @@
 package com.example.unsplash.data.models
 
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
-
+@Serializable
+@Entity(tableName = "unsplashTable")
 @Parcelize
 data class UnsplashPhoto(
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val likes: String,
     val liked_by_user: Boolean,
     val description: String?,
+    @Embedded
     val exif: UnsplashExif?,
-    val location: UnsplashLocation?,
+ //   @Embedded
+  //  val location: UnsplashLocation?,
+    @Embedded
     val urls: UnsplashPhotoPhotoUrls,
+    @Embedded
     val user: UnsplashUser
 ) : Parcelable {
+    @Serializable
     @Parcelize
     data class UnsplashExif(
         val make: String?,
@@ -24,20 +35,21 @@ data class UnsplashPhoto(
         val focal_length: String?,
         val iso: String?
     ) : Parcelable
-
+    @Serializable
     @Parcelize
     data class UnsplashLocation(
         val city: String?,
         val country: String?,
         val position: PhotoPosition?
     ) : Parcelable {
+        @Serializable
         @Parcelize
         data class PhotoPosition(
             val latitude: Double?,
             val longitude: Double?
         ) : Parcelable
     }
-
+    @Serializable
     @Parcelize
     data class UnsplashPhotoPhotoUrls(
         val raw: String,
@@ -46,7 +58,7 @@ data class UnsplashPhoto(
         val small: String,
         val thumb: String
     ) : Parcelable
-
+    @Serializable
     @Parcelize
     data class UnsplashUser(
         val name: String,
