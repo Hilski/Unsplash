@@ -60,6 +60,12 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
             viewModel.logout()
         }
 
+        binding.mapButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_userInfoFragment_to_mapActivity
+            )
+        }
+
         viewModel.loadingFlow.launchAndCollectIn(viewLifecycleOwner) { isLoading ->
             binding.progressBar.isVisible = isLoading
         }

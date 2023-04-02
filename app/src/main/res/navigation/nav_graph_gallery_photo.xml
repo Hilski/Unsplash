@@ -42,6 +42,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_mapActivity"
+            app:destination="@id/mapActivity" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -83,4 +86,8 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
+    <activity
+        android:id="@+id/mapActivity"
+        android:name="com.example.unsplash.ui.MapActivity"
+        android:label="MapActivity" />
 </navigation>

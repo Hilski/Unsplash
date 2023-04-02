@@ -65,6 +65,7 @@ class CollectionDetailsPhotoFragment : Fragment() {
         viewModel.getPhotoFlow.launchAndCollectIn(viewLifecycleOwner) { photo ->
             if (photo != null) {
                 getPhoto = photo
+                binding.latitude.text = photo.location.position.latitude.toString()
                 loadImage()
             }
         }

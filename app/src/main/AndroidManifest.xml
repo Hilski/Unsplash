@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".App"
@@ -16,6 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unsplash"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.MapActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB9rTB4wSWKOIjbG4oWOppo0HSRC8qMFkY" />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />
