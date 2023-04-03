@@ -56,10 +56,10 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
 
 
             val mBuilder = AlertDialog.Builder(requireContext())
-                .setTitle("Confirm")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", null)
-                .setNegativeButton("No", null)
+                .setTitle(R.string.confirm)
+                .setMessage(R.string.are_you_sure_you_want_to_get_out_all_local_data_will_be_deleted_)
+                .setPositiveButton(R.string.yes, null)
+                .setNegativeButton(R.string.no, null)
                 .show()
 
             // Function for the positive button

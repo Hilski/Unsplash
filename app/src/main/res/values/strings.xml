@@ -43,6 +43,9 @@
     <string name="get_started">Get Started</string>
     <string name="share_it">Share</string>
     <string name="this_photo_does_not_have_location_info">This photo does not have location info</string>
-
+    <string name="are_you_sure_you_want_to_get_out_all_local_data_will_be_deleted.">Are you sure you want to get out? All local data will be deleted.</string>
+    <string name="confirm">Confirm</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

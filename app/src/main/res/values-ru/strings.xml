@@ -44,4 +44,8 @@
     <string name="get_started">Начать</string>
     <string name="share_it">Поделиться</string>
     <string name="this_photo_does_not_have_location_info">У этой фотографии отсутствует информация о локации</string>
+    <string name="are_you_sure_you_want_to_get_out_all_local_data_will_be_deleted.">Вы уверены, что хотите выйти? Все локальные данные будут удалены.</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>
