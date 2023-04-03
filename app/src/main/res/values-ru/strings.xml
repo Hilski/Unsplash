@@ -43,4 +43,5 @@
     <string name="skip">Пропустить</string>
     <string name="get_started">Начать</string>
     <string name="share_it">Поделиться</string>
+    <string name="this_photo_does_not_have_location_info">У этой фотографии отсутствует информация о локации</string>
 </resources>

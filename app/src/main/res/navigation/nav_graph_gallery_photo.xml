@@ -42,9 +42,6 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
-        <action
-            android:id="@+id/action_userInfoFragment_to_mapActivity"
-            app:destination="@id/mapActivity" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -72,7 +69,15 @@
         android:id="@+id/collectionDetailsPhotoFragment"
         android:name="com.example.unsplash.ui.gallery.CollectionDetailsPhotoFragment"
         android:label="fragment_collection_details_photo"
-        tools:layout="@layout/fragment_collection_details_photo" />
+        tools:layout="@layout/fragment_collection_details_photo" >
+        <action
+            android:id="@+id/action_collectionDetailsPhotoFragment_to_mapActivity"
+            app:destination="@id/mapActivity"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/myLikedPhotoFragment"
         android:name="com.example.unsplash.ui.gallery.MyLikedPhotoFragment"

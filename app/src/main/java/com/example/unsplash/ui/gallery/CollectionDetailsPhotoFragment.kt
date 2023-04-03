@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -22,6 +23,10 @@ import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.data.models.CollectionDetailsPhoto
 import com.example.unsplash.databinding.FragmentCollectionDetailsPhotoBinding
+import com.example.unsplash.ui.MapViewModel
+import com.example.unsplash.ui.description
+import com.example.unsplash.ui.latitude
+import com.example.unsplash.ui.longitude
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +62,20 @@ class CollectionDetailsPhotoFragment : Fragment() {
             textViewLikesData.isVisible = false
             textViewLike.isVisible = false
 
+            mapButton.setOnClickListener {
+                if (latitude == 0.0 && longitude == 0.0) {
+                    Toast.makeText(
+                        context,
+                        R.string.this_photo_does_not_have_location_info,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    findNavController().navigate(
+                        R.id.action_collectionDetailsPhotoFragment_to_mapActivity
+                    )
+                }
+            }
+
         }
 
         viewModel.likePhotoInfo(idPhoto)
@@ -65,7 +84,9 @@ class CollectionDetailsPhotoFragment : Fragment() {
         viewModel.getPhotoFlow.launchAndCollectIn(viewLifecycleOwner) { photo ->
             if (photo != null) {
                 getPhoto = photo
-                binding.latitude.text = photo.location.position.latitude.toString()
+                latitude = photo.location.position.latitude ?: 0.0
+                longitude = photo.location.position.longitude ?: 0.0
+                description = photo.description ?: ""
                 loadImage()
             }
         }

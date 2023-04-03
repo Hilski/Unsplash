@@ -1,10 +1,10 @@
 package com.example.unsplash.ui.user_info
 
 import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,17 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.unsplash.R
 import com.example.unsplash.databinding.FragmentUserInfoBinding
-
 import com.example.unsplash.utils.launchAndCollectIn
 import com.example.unsplash.utils.resetNavGraph
 import com.example.unsplash.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
@@ -57,13 +53,22 @@ class UserInfoFragment : Fragment(R.layout.fragment_user_info) {
         }
 
         binding.logout.setOnClickListener {
-            viewModel.logout()
-        }
 
-        binding.mapButton.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_userInfoFragment_to_mapActivity
-            )
+
+            val mBuilder = AlertDialog.Builder(requireContext())
+                .setTitle("Confirm")
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", null)
+                .setNegativeButton("No", null)
+                .show()
+
+            // Function for the positive button
+            // is programmed to exit the application
+            val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
+            mPositiveButton.setOnClickListener {
+                viewModel.logout()
+                exitProcess(0)
+            }
         }
 
         viewModel.loadingFlow.launchAndCollectIn(viewLifecycleOwner) { isLoading ->

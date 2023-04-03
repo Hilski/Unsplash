@@ -110,15 +110,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/save_it_button" />
 
             <TextView
-                android:id="@+id/latitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/mapButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                app:drawableStartCompat="@drawable/location"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/save_it_button"
                 app:layout_constraintTop_toBottomOf="@+id/image_view" />
-            />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

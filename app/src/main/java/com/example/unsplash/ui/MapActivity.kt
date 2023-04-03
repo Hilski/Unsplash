@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.unsplash.R
 import com.example.unsplash.databinding.ActivityMapBinding
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.LocationSource
 import com.google.android.gms.maps.SupportMapFragment
@@ -105,18 +106,21 @@ class MapActivity : AppCompatActivity() {
     private fun createMarker() {
         lifecycleScope.launchWhenStarted {
             viewModel.markersFlow.collect {
-                for (i in 0..3) {
-                    map?.addMarker(
-                        MarkerOptions().position(
-                            LatLng(
-                                viewModel.markersFlow.value[i][0] as Double,
-                                viewModel.markersFlow.value[i][1] as Double
-                            )
-                        )
-                            .title(viewModel.markersFlow.value[i][2].toString())
-                    )
-                }
 
+                map?.addMarker(
+                    MarkerOptions().position(
+                        LatLng(
+                            viewModel.markersFlow.value[0] as Double,
+                            viewModel.markersFlow.value[1] as Double
+                        )
+                    )
+                        .title(viewModel.markersFlow.value[2].toString())
+                )
+                map?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(
+                    viewModel.markersFlow.value[0] as Double,
+                    viewModel.markersFlow.value[1] as Double
+                )
+                ))
             }
         }
     }

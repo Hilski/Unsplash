@@ -42,6 +42,7 @@
     <string name="skip">Skip</string>
     <string name="get_started">Get Started</string>
     <string name="share_it">Share</string>
+    <string name="this_photo_does_not_have_location_info">This photo does not have location info</string>
 
 
 </resources>
