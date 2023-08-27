@@ -13,3 +13,8 @@ View collections, and photo location:
 
 ![UnsplCollection](https://github.com/Hilski/Unsplash/assets/109789798/985d5acc-22e4-49c1-bad6-fc015a779f15)
 ![UnsplGoogleMaps](https://github.com/Hilski/Unsplash/assets/109789798/bd159722-41be-45ff-906d-9417b554e1c1)
+
+Caching with RemoteMediator and logout:
+
+![UnsplRemoteMediator](https://github.com/Hilski/Unsplash/assets/109789798/8e184e64-6b8a-491d-b133-3d7f75b1cc8d)
+![UnsplLogout](https://github.com/Hilski/Unsplash/assets/109789798/5d1727aa-c737-4186-b8cf-4ae56e118032)
