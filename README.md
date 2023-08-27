@@ -9,6 +9,7 @@ Search Photos. Like, Save, Share photo.
 ![UnsplSearchPhoto](https://github.com/Hilski/Unsplash/assets/109789798/baeccd72-b172-493c-98b2-5f06984d369d)
 ![UnsplLikeSaveShare](https://github.com/Hilski/Unsplash/assets/109789798/0ea721af-0f9d-4ca4-94f9-9388a26182b7)
 
-View collections:
+View collections, and photo location:
 
 ![UnsplCollection](https://github.com/Hilski/Unsplash/assets/109789798/985d5acc-22e4-49c1-bad6-fc015a779f15)
+![UnsplGoogleMaps](https://github.com/Hilski/Unsplash/assets/109789798/bd159722-41be-45ff-906d-9417b554e1c1)
